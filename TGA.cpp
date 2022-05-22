@@ -81,6 +81,9 @@ bool TGA::readTGA(string filename, BitmapMin *bmp)
 	int n1 = 0;
 	int n = 0;
 
+	bmp->width = tgaFile.width;
+	bmp->height = tgaFile.height;
+
 	//Load filedata to bitmap object
 	for (int a = 0; a < tgaFile.width; a++)
 	{
