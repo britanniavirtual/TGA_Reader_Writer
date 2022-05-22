@@ -21,7 +21,7 @@ bool TGA::readTGA(string filename, BitmapMin *bmp)
 	int colorMode;
 	unsigned char colorSwap;
 
-	//Open the TGA file.
+	//Open TGA file
 	filePtr = fopen(filename.c_str(), "rb");
 	if (filePtr == NULL)
 	{
@@ -81,6 +81,7 @@ bool TGA::readTGA(string filename, BitmapMin *bmp)
 	int n1 = 0;
 	int n = 0;
 
+	//Load filedata to bitmap object
 	for (int a = 0; a < tgaFile.width; a++)
 	{
 		for (int b = 0; b < tgaFile.height; b++)

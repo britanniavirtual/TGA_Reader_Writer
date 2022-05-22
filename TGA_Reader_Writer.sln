@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+VisualStudioVersion = 15.0.28307.1433
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGA2", "TGA2.vcxproj", "{C5B56E18-FC6A-44FC-B6EE-207A9E3F8DEB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TGA_Reader_Writer", "TGA_Reader_Writer.vcxproj", "{C5B56E18-FC6A-44FC-B6EE-207A9E3F8DEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8F66788D-2EBB-4713-B925-9F2A9463DD81}
+		SolutionGuid = {2722DF2D-3706-4CCC-A1D6-BA9B22C0D322}
 	EndGlobalSection
 EndGlobal
