@@ -133,11 +133,9 @@ bool TGA::writeTGA(string filename, BitmapMin *bmp)
 	{
 		for (int x = 0; x < bmp->width; x++)
 		{
-			//cout << "y:" << y << " , x:" << x << endl;
-
 			tgafile.put((char)bmp->map[y][x].b);//b
 			tgafile.put((char)bmp->map[y][x].g);//g
-			tgafile.put((char)bmp->map[y][x].r);//ra
+			tgafile.put((char)bmp->map[y][x].r);//r
 		}
 	}
 	tgafile.close();

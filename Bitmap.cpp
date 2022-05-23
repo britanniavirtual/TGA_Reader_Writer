@@ -233,15 +233,15 @@ void BitmapUtils::drawRectangle(BitmapMin *input, int sx, int sy, int ex, int ey
 //--------------------------------------
 // Desc:
 //--------------------------------------
-void BitmapUtils::RGBFill(BitmapMin *input, int r, int g, int b)
+void BitmapUtils::rgbFill(BitmapMin *input, rgb color)
 {
 	for (int i = 0; i < MAX_INDEX; i++)
 	{
 		for (int j = 0; j < MAX_INDEX; j++)
 		{
-			input->map[j][i].r = r;
-			input->map[j][i].g = g;
-			input->map[j][i].b = b;
+			input->map[j][i].r = color.r;
+			input->map[j][i].g = color.g;
+			input->map[j][i].b = color.b;
 		}
 	}
 }

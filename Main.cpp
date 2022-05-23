@@ -12,6 +12,7 @@ int main()
 	//u.drawLine(&bmp, 45, 128, 0, 0, rgb(0,255,0));
 	//u.drawRectangle(&bmp, 32, 32, 128, 128);
 	//u.resample(&bmp, 128, 256);
+	//u.rgbFill(&bmp, rgb(0, 0, 128));
 
 	tg.writeTGA("output.tga", &bmp);
 

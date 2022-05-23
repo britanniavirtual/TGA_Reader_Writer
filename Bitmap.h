@@ -51,7 +51,7 @@ public:
 	BitmapUtils();
 	~BitmapUtils();
 
-	void RGBFill(BitmapMin *input, int r, int g, int b);
+	void rgbFill(BitmapMin *input, rgb color);
 	
 	void rotate90deg(BitmapMin *input);
 	void flipHorizontal(BitmapMin *input);
