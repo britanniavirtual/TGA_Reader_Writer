@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "JointHeader.h"
 
 //--------------------------------------
@@ -32,7 +31,7 @@ BitmapMin::~BitmapMin()
 }
 
 //------------------------------
-// Desc: Free allocated memory as required
+// Desc: Free allocated memory as needed
 //------------------------------
 void BitmapMin::shutDown()
 {
@@ -44,53 +43,31 @@ void BitmapMin::shutDown()
 }
 
 //--------------------------------------
-// Desc: Draw a line on a bitmap
+// Desc: Draw a line on a bitmap (1 pixel width)
 //--------------------------------------
-void BitmapUtils::drawLine(BitmapMin *input, float degs, float magnitude, int stX, int stY, string color)
+void BitmapUtils::drawLine(BitmapMin *input, float degrees, float magnitude, int stX, int stY, rgb color)
 {
-	int r1 = 0;
-	int g1 = 0;
-	int b1 = 255;
+	//Line is made of 2 equal segments
+	int r1 = color.r;
+	int g1 = color.g;
+	int b1 = color.b;
 
-	int r2 = 255;
-	int g2 = 255;
-	int b2 = 0;
-
-	if (color == "red")
-	{
-		r1 = 255;
-		g1 = 0;
-		b1 = 0;
-
-		r2 = 0;
-		g2 = 255;
-		b2 = 0;
-	}
-
-	if (color == "white")
-	{
-		r1 = 255;
-		g1 = 255;
-		b1 = 255;
-
-		r2 = 255;
-		g2 = 255;
-		b2 = 255;
-	}
-
+	int r2 = color.r;
+	int g2 = color.g;
+	int b2 = color.b;
 
 	for (int n = 0; n < magnitude / 2; n++)
 	{
-		int x = stX + cos(degs * 0.0174533) * n;
-		int y = stY + sin(degs * 0.0174533) * n;
+		int x = stX + cos(degrees * 0.0174533) * n;
+		int y = stY + sin(degrees * 0.0174533) * n;
 
-		if (degs == 0 || degs == 180 || degs == 360)
+		if (degrees == 0 || degrees == 180 || degrees == 360)
 		{
 			x = stX + n;
 			y = stY;
 		}
 
-		if (degs == 90 || degs == 270 || degs == -90)
+		if (degrees == 90 || degrees == 270 || degrees == -90)
 		{
 			x = stX;
 			y = stY + n;
@@ -106,16 +83,16 @@ void BitmapUtils::drawLine(BitmapMin *input, float degs, float magnitude, int st
 
 	for (int n = 0; n < magnitude / 2; n++)
 	{
-		int x = stX - cos(degs * 0.0174533) * n;
-		int y = stY - sin(degs * 0.0174533) * n;
+		int x = stX - cos(degrees * 0.0174533) * n;
+		int y = stY - sin(degrees * 0.0174533) * n;
 
-		if (degs == 0 || degs == 180 || degs == 360)
+		if (degrees == 0 || degrees == 180 || degrees == 360)
 		{
 			x = stX - n;
 			y = stY;
 		}
 
-		if (degs == 90 || degs == 270 || degs == -90)
+		if (degrees == 90 || degrees == 270 || degrees == -90)
 		{
 			x = stX;
 			y = stY - n;
@@ -132,9 +109,9 @@ void BitmapUtils::drawLine(BitmapMin *input, float degs, float magnitude, int st
 
 
 //--------------------------------------
-// Desc: Resample a BitmapMin object to the new dimensions
+// Desc: Resample a BitmapMin object to new dimensions
 //--------------------------------------
-void BitmapUtils::resize(BitmapMin *input, int width, int height)
+void BitmapUtils::resample(BitmapMin *input, int width, int height)
 {
 	double scaleWidth = (double)width / (double)input->width;
 	double scaleHeight = (double)height / (double)input->height;
@@ -178,47 +155,6 @@ void BitmapUtils::resize(BitmapMin *input, int width, int height)
 	//stringstream d;
 	//d << input->width << " " << input->height << endl;
 	//MessageBox(NULL, d.str().c_str(), "", MB_ICONASTERISK | MB_OK);
-}
-
-
-//--------------------------------------
-// 
-//--------------------------------------
-void BitmapUtils::drawRect(BitmapMin *input)
-{
-	int stX = 32;
-	int stY = 32;
-	int enX = 128;
-	int enY = 128;
-
-	for (int a = stX; a < enX; a++)
-	{
-		input->map[a][stY].r = 255;
-		input->map[a][stY].g = 0;
-		input->map[a][stY].b = 0;
-	}
-
-	for (int a = stY; a < enY; a++)
-	{
-		input->map[stX][a].r = 255;
-		input->map[stX][a].g = 0;
-		input->map[stX][a].b = 0;
-	}
-
-	for (int a = stY; a < enY; a++)
-	{
-		input->map[enX][a].r = 255;
-		input->map[enX][a].g = 0;
-		input->map[enX][a].b = 0;
-	}
-
-
-	for (int a = stX; a < enX; a++)
-	{
-		input->map[a][enY].r = 255;
-		input->map[a][enY].g = 0;
-		input->map[a][enY].b = 0;
-	}
 }
 
 
@@ -315,9 +251,9 @@ void BitmapUtils::RGBFill(BitmapMin *input, int r, int g, int b)
 //--------------------------------------
 BitmapUtils::BitmapUtils()
 {
-	tmp = new BitmapMin;
-	tmp->width = MAX_INDEX;
-	tmp->height = MAX_INDEX;
+	temporary = new BitmapMin;
+	temporary->width = MAX_INDEX;
+	temporary->height = MAX_INDEX;
 }
 
 //--------------------------------------
@@ -325,7 +261,7 @@ BitmapUtils::BitmapUtils()
 //--------------------------------------
 BitmapUtils::~BitmapUtils()
 {
-	delete tmp;
+	delete temporary;
 }
 
 //--------------------------------------
@@ -337,9 +273,9 @@ void BitmapUtils::flipHorizontal(BitmapMin *input)
 	{
 		for (int j = 0; j < input->height; j++)
 		{
-			tmp->map[j][i].r = input->map[j][i].r;
-			tmp->map[j][i].g = input->map[j][i].g;
-			tmp->map[j][i].b = input->map[j][i].b;
+			temporary->map[j][i].r = input->map[j][i].r;
+			temporary->map[j][i].g = input->map[j][i].g;
+			temporary->map[j][i].b = input->map[j][i].b;
 		}
 	}
 
@@ -351,9 +287,9 @@ void BitmapUtils::flipHorizontal(BitmapMin *input)
 		{
 			int p = i;
 			select = depth - p;
-			input->map[j][i].r = tmp->map[j][select].r;
-			input->map[j][i].g = tmp->map[j][select].g;
-			input->map[j][i].b = tmp->map[j][select].b;
+			input->map[j][i].r = temporary->map[j][select].r;
+			input->map[j][i].g = temporary->map[j][select].g;
+			input->map[j][i].b = temporary->map[j][select].b;
 		}
 	}
 }
@@ -368,9 +304,9 @@ void BitmapUtils::flipVertical(BitmapMin *input)
 	{
 		for (int j = 0; j < input->height; j++)
 		{
-			tmp->map[j][i].r = input->map[j][i].r;
-			tmp->map[j][i].g = input->map[j][i].g;
-			tmp->map[j][i].b = input->map[j][i].b;
+			temporary->map[j][i].r = input->map[j][i].r;
+			temporary->map[j][i].g = input->map[j][i].g;
+			temporary->map[j][i].b = input->map[j][i].b;
 		}
 	}
 
@@ -386,9 +322,9 @@ void BitmapUtils::flipVertical(BitmapMin *input)
 
 			select = depth - p - 1;
 
-			input->map[j][i].r = tmp->map[select][i].r;
-			input->map[j][i].g = tmp->map[select][i].g;
-			input->map[j][i].b = tmp->map[select][i].b;
+			input->map[j][i].r = temporary->map[select][i].r;
+			input->map[j][i].g = temporary->map[select][i].g;
+			input->map[j][i].b = temporary->map[select][i].b;
 		}
 	}
 }
@@ -402,9 +338,9 @@ void BitmapUtils::rotate90deg(BitmapMin *input)
 	{
 		for (int j = 0; j < input->height; j++)
 		{
-			tmp->map[j][i].r = input->map[j][i].r;
-			tmp->map[j][i].g = input->map[j][i].g;
-			tmp->map[j][i].b = input->map[j][i].b;
+			temporary->map[j][i].r = input->map[j][i].r;
+			temporary->map[j][i].g = input->map[j][i].g;
+			temporary->map[j][i].b = input->map[j][i].b;
 		}
 	}
 
@@ -412,9 +348,9 @@ void BitmapUtils::rotate90deg(BitmapMin *input)
 	{
 		for (int j = 0; j < input->height; j++)
 		{
-			input->map[input->height - j - 1][i].r = tmp->map[i][j].r;
-			input->map[input->height - j - 1][i].g = tmp->map[i][j].g;
-			input->map[input->height - j - 1][i].b = tmp->map[i][j].b;
+			input->map[input->height - j - 1][i].r = temporary->map[i][j].r;
+			input->map[input->height - j - 1][i].g = temporary->map[i][j].g;
+			input->map[input->height - j - 1][i].b = temporary->map[i][j].b;
 		}
 	}
 }

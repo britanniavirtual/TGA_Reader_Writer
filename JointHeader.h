@@ -1,6 +1,6 @@
 #pragma once
 
-//Use these defines for fopen to work
+//Defines for fopen
 #define _CRT_SECURE_NO_WARNINGS 1 
 #define _WINSOCK_DEPRECATED_NO_WARNINGS 1 
 

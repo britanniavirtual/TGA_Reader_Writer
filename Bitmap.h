@@ -5,21 +5,25 @@
 //----------------------------------------------------------
 //
 //----------------------------------------------------------
-struct colour
-{
-	int r;
-	int g;
-	int b;
-};
-
-//----------------------------------------------------------
-//
-//----------------------------------------------------------
 struct rgb
 {
 	int r;
 	int g;
 	int b;
+
+	rgb()
+	{
+		r = 255;
+		g = 255;
+		b = 255;
+	}
+
+	rgb(int r, int g, int b)
+	{
+		this->r = r;
+		this->g = g;
+		this->b = b;
+	}
 };
 
 //----------------------------------------------------------
@@ -53,19 +57,15 @@ public:
 	void flipHorizontal(BitmapMin *input);
 	void flipVertical(BitmapMin *input);
 
-	void drawRectangle(BitmapMin *input, int sx, int sy, int ex, int ey);
+	rgb rectColor = { 234, 235, 66 };
 	int rectWidth = 3;
-
-	rgb rectColor = {234, 235, 66};
-
-	void drawLine(BitmapMin *input, float angle, float magnitude, int stX, int stY, string color);
-	void resize(BitmapMin *input, int width, int height);
-
-	void drawRect(BitmapMin *input);
+	void drawRectangle(BitmapMin *input, int sx, int sy, int ex, int ey);
+	void drawLine(BitmapMin *input, float degrees, float magnitude, int stX, int stY, rgb color);
+	void resample(BitmapMin *input, int newWidth, int newHeight);
 
 private:
 
-	BitmapMin *tmp;
+	BitmapMin *temporary;
 };
 
 

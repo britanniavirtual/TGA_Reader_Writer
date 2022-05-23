@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "JointHeader.h"
 
 TGA::TGA()
@@ -9,10 +8,9 @@ TGA::~TGA()
 {
 }
 
-
 bool TGA::readTGA(string filename, BitmapMin *bmp)
 {
-	TGAFILE2 tgaFile;
+	TGAFILE tgaFile;
 
 	FILE *filePtr;
 	unsigned char ucharBad;
@@ -50,9 +48,6 @@ bool TGA::readTGA(string filename, BitmapMin *bmp)
 	fread(&tgaFile.width, sizeof(short int), 1, filePtr);
 	fread(&tgaFile.height, sizeof(short int), 1, filePtr);
 
-	//cout << tgaFile->imageWidth << " " << tgaFile->imageHeight << endl;
-	//system("PAUSE");
-
 	//Read the bit depth.
 	fread(&tgaFile.bitCount, sizeof(unsigned char), 1, filePtr);
 
@@ -76,15 +71,15 @@ bool TGA::readTGA(string filename, BitmapMin *bmp)
 		tgaFile.data[imageIdx + 2] = colorSwap;
 	}
 
+	bmp->width = tgaFile.width;
+	bmp->height = tgaFile.height;
+
+	//Load filedata to bitmap object
 	int curX = -1;
 	int curY = 0;
 	int n1 = 0;
 	int n = 0;
 
-	bmp->width = tgaFile.width;
-	bmp->height = tgaFile.height;
-
-	//Load filedata to bitmap object
 	for (int a = 0; a < tgaFile.width; a++)
 	{
 		for (int b = 0; b < tgaFile.height; b++)

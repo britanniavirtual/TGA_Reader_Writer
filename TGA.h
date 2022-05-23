@@ -1,6 +1,6 @@
 #pragma once
 
-struct TGAFILE2
+struct TGAFILE
 {
 	unsigned char typeCode;
 	short int width;
